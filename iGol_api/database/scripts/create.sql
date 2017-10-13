@@ -94,6 +94,7 @@ CREATE TABLE `iGoldb`.`schedules` (
   `schedule_day` TINYINT(1) NOT NULL DEFAULT 0 COMMENT '1:MONDAY 7:SUNDAY',
   `init_hour` TIME NOT NULL,
   `price` FLOAT(6,4) NOT NULL,
+  `available` TINYINT(1) NOT NULL DEFAULT 1 COMMENT '0:NOT 1:YES',
   `venue_id` INT(11) NOT NULL,
   `created_at` TIMESTAMP NULL DEFAULT NULL,
   `updated_at` TIMESTAMP NULL DEFAULT NULL,

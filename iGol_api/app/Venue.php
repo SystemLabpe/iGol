@@ -22,8 +22,8 @@ class Venue extends Model {
 
     ];
 
-    public function tournament(){
-        return $this->belongsTo('App\Tournament');
+    public function schedules(){
+        return $this->hasMany('App\Schedule');
     }
 
 
