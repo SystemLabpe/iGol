@@ -25,6 +25,30 @@ class VenueController extends Controller {
     }
 
     public function store(Request $request){
+        $rules = [
+            'name' => 'required',
+            'address' => 'required',
+            'phone' => 'required',
+            'latitude' => 'required',
+            'longitude' => 'required',
+            'day_price' => 'required',
+            'night_price' => 'required',
+            'parking' => 'required',
+            'play_area' => 'required'
+        ];
+        $this->validate($request, $rules);
+
+        $venue = new Venue();
+        $venue->name = $request->name;
+        $venue->address = $request->address;
+        $venue->phone = $request->phone;
+        $venue->latitude = $request->latitude;
+        $venue->longitude = $request->longitude;
+        $venue->day_price = $request->day_price;
+        $venue->night_price = $request->night_price;
+        $venue->parking = $request->parking;
+        $venue->play_area = $request->play_area;
+        $venue->save();
 
     }
 
@@ -44,7 +68,7 @@ class VenueController extends Controller {
 
 
     public function destroy($id){
-        
+        //
     }
 
 }
