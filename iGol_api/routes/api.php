@@ -22,3 +22,8 @@ Route::get('/version', function () {
 });
 
 Route::resource('venues','VenueController');
+
+Route::resource('schedules','ScheduleController');
+
+
+Route::get('/schedules/availability/venue/{venueId}/date/{date}', 'ScheduleController@getByVenueAndDate');
