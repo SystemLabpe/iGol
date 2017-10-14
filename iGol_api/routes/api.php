@@ -25,5 +25,6 @@ Route::resource('venues','VenueController');
 
 Route::resource('schedules','ScheduleController');
 
+Route::resource('scheduleAvailabilities','ScheduleAvailabilityController');
 
 Route::get('/schedules/availability/venue/{venueId}/date/{date}', 'ScheduleController@getByVenueAndDate');

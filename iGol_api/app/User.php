@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'first_name','last_name', 'email', 'password','phone','doc_type','doc_number'
     ];
 
     /**
@@ -26,4 +26,13 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function venue(){
+        return $this->belongsTo('App\Venue');
+    }
+
+    public function role(){
+        return $this->belongsTo('App\Role');
+    }
+
 }

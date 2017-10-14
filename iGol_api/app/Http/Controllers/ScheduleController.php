@@ -11,6 +11,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Schedule;
+use App\ScheduleAvailability;
 
 use Log;
 
@@ -49,9 +50,20 @@ class ScheduleController extends Controller{
     }
 
     public function getByVenueAndDate($venueId,$date){
+        //Todo add venue constraint
+
+        $scheduleAvailabilities = ScheduleAvailability::where('field_date',$date)->get();
+
+        $schedules_ids = [];
+        foreach($scheduleAvailabilities as $scheduleAvailability){
+            array_push($schedules_ids,$scheduleAvailability->schedule_id);
+        }
+
         $schedules = Schedule::where('schedule_day','=',date('N', strtotime($date)))
             ->where('venue_id','=',$venueId)
+            ->whereNotIn('id',$schedules_ids)
             ->get();
+
         if(count($schedules)>0){
             return $this->createDataResponse($schedules);
         }

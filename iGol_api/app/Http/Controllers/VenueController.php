@@ -122,6 +122,7 @@ class VenueController extends Controller {
         foreach($schedules as $schedule){
             $schedule = (object)$schedule;
             $updateSchedule = Schedule::find($schedule->id);
+            //TODO add another fields
             if($updateSchedule->available != $schedule->available){
                 $updateSchedule->available = $schedule->available;
                 $updateSchedule->save();

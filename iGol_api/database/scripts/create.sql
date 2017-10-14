@@ -63,7 +63,7 @@ CREATE TABLE `iGoldb`.`users` (
   `doc_type` TINYINT(1) NOT NULL DEFAULT 0 COMMENT '0:DNI 1:ALIEN CARD',
   `doc_number` VARCHAR(20) NOT NULL,
   `remember_token` VARCHAR(100) NULL DEFAULT NULL,
-  `venue_id` INT(11) NOT NULL,
+  `venue_id` INT(11) NULL,
   `role_id` INT(11) NOT NULL,
   `created_at` TIMESTAMP NULL DEFAULT NULL,
   `updated_at` TIMESTAMP NULL DEFAULT NULL,
@@ -110,11 +110,11 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
 -- -----------------------------------------------------
--- Table `iGoldb`.`schedule_availability`
+-- Table `iGoldb`.`schedule_availabilities`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `iGoldb`.`schedule_availability` ;
+DROP TABLE IF EXISTS `iGoldb`.`schedule_availabilities` ;
 
-CREATE TABLE `iGoldb`.`schedule_availability` (
+CREATE TABLE `iGoldb`.`schedule_availabilities` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `field_date` DATE NOT NULL,
   `schedule_availability_status` TINYINT(1) NOT NULL DEFAULT 0 COMMENT '0:RESERVED 1:RENTED 2:CANCELED',
@@ -149,14 +149,14 @@ CREATE TABLE `iGoldb`.`payments` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `payment_type` TINYINT(1) NOT NULL DEFAULT 0 COMMENT '1:CREDIT CARD 7:CASH',
   `amount` FLOAT(6,4) NOT NULL,
-  `schedule_availability_id` INT(11) NOT NULL,
+  `schedule_availabilities_id` INT(11) NOT NULL,
   `created_at` TIMESTAMP NULL DEFAULT NULL,
   `updated_at` TIMESTAMP NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
-  INDEX `sch_ava_payments_idx` (`schedule_availability_id` ASC),
+  INDEX `sch_ava_payments_idx` (`schedule_availabilities_id` ASC),
   CONSTRAINT `sch_ava_payments_fk`
-    FOREIGN KEY (`schedule_availability_id`)
-    REFERENCES `iGoldb`.`schedule_availability` (`id`)
+    FOREIGN KEY (`schedule_availabilities_id`)
+    REFERENCES `iGoldb`.`schedule_availabilities` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
 ) 
